@@ -1,0 +1,62 @@
+/**
+ * Created by Administrator on 2018/6/8 0008.
+ */
+import React,{Component} from 'react';
+import {
+    Platform,
+    View,
+    Text,
+    StyleSheet,
+    Dimensions
+} from 'react-native';
+
+const instructions = Platform.select({
+    ios: 'Press Cmd+R to reload,\n' +
+    'Cmd+D or shake for dev menu',
+    android: 'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu'
+});
+
+type
+Props = {};
+const {width, heihgt} = Dimensions.get('window');
+
+export default class homeDrawer extends Component<Props> {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        }
+    }
+
+    render() {
+        const menu = <Text style={{marginTop: 22}} onPress={() => alert('点击了aaa')}>aaa</Text>;
+        return (
+            <View>
+
+            </View>
+        );
+    }
+}
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        marginTop: 22
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5
+    }
+});

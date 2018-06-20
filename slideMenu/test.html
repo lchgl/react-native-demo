@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>demo</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <style>
+        .inner-wrapper{
+            width: 280px;
+            height: 260px;
+            margin: 40px auto;
+            background: url('./11.png')no-repeat;
+            background-size: 100% 100%;
+            box-sizing: border-box;
+            padding:25px 17.5px;
+        }
+        .gift{
+            display:inline-table;
+            width:33.33333333%;
+            height:70px;
+            line-height: 70px;
+            text-align:center;
+            border-radius:6px;
+        }
+        .wrapper{
+            box-sizing: border-box;
+            padding:0 3%;
+        }
+        .inner-wrapper div div{
+            float: left;
+        }
+        .active{
+            background: rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="inner-wrapper">
+        <div>
+            <div class="gift gift1">1</div>
+            <div class="gift gift2">2</div>
+            <div class="gift gift3">3</div>
+        </div>
+        <div>
+            <div class="gift gift0">8</div>
+            <div class="button gift"></div>
+            <div class="gift gift4">4</div>
+        </div>
+        <div>
+            <div class="gift gift7">7</div>
+            <div class="gift gift6">6</div>
+            <div class="gift gift5">5</div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(e) {
+        var stopStep=1;//表示最终奖品位置
+        var runT=null;//转动方法
+        var step=-1;//计算转动的步数，控制转速和停止
+        var during=2;//转速
+        var flag =true;//是否可以点击
+        $(".button").click(function(e){
+            if(flag){
+                flag = false;
+                stopStep=Math.floor(Math.random()*8+1);
+                console.log(stopStep);
+                runT=setTimeout(runF,100);
+            }
+        });
+        function runF(){
+//            console.log(step)
+//            console.log(during)
+            if(step>=(40+stopStep))//设置转动多少圈
+            {
+                $(".gift"+(step%8)).addClass('active');
+                flag = true;
+                step=stopStep;
+                console.log("you get"+step);
+                clearTimeout(runT);//停止转动
+                return;
+            }
+            if(step>=(32+stopStep)){ //在即将结束转动前减速
+                during+=1;
+            }else{
+                if(during<=2){ //控制中间转速
+                    during=2;
+                }
+                during--;
+            }
+            step++;
+            $(".gift").each(function(index, element) {
+                $(this).removeClass('active');
+            });
+            $(".gift"+(step%8)).addClass('active');
+            runT=setTimeout(runF,during*50);
+        }
+    });
+</script>
+</body>
+</html>
