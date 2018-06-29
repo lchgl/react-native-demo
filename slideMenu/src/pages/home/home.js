@@ -18,9 +18,15 @@ type
 Props = {};
 const {width, heihgt} = Dimensions.get('window');
 export default class home extends Component<Props> {
-	
+	constructor (props){
+		super(props);
+		this.state = {
+			bannerList:[]
+		}
+	}
     render () {
         const {navigation} = this.props;
+		let bannerList = this.state.bannerList
         return (
 			<View>
 				<View style={styles.container}>
@@ -44,13 +50,41 @@ export default class home extends Component<Props> {
 						<View style={styles.slide}>
 							<Image resizeMode='stretch' style={styles.image} source={require('../../../res/img/banner/swiper-xyx.jpg')} />
 						</View>
+						{/*{
+							bannerList.map((item)=>{
+								console.log(111)
+								return 	<View style={styles.slide}>
+											<Image resizeMode='stretch' style={styles.image} source={item.img_dir} />
+										</View>
+							})
+						}*/}
 					</Swiper>
 				</View>
-				<Text>喜投网主页</Text>
+				<Text>我是swiper图</Text>
 				<Button title="go back" onPress={() => {}}/>
 			</View>
         )
     }
+	getBannerList(){
+		let formData = new FormData();
+		formData.append('type',3)
+		fetch('http://www.xitouwang.com/public/getBannerList',{
+			method:'POST',
+			body:formData
+		}).then((response)=>{
+			if(response.ok){
+				return response.json();
+			}
+		}).then((json)=>{
+			console.log(json);
+			this.bannerList = json;
+		}).catch((error)=>{
+			console.error(error)
+		})
+	}
+	componentDidMount(){
+		this.getBannerList()
+	}
 }
 
 const styles = StyleSheet.create({
