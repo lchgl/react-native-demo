@@ -60,7 +60,7 @@ export default class home extends Component<Props> {
 						}*/}
 					</Swiper>
 				</View>
-				<Text>我是swiper图</Text>
+				<Text>我是swiper图11</Text>
 				<Button title="go back" onPress={() => {}}/>
 			</View>
         )

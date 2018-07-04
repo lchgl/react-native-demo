@@ -53,7 +53,7 @@ export default class find extends Component<Props> {
 			<TestState text='TestStatus one'/>
 			<TestState/>
 			<TestState>1111</TestState>
-            <Button title="账户" onPress={()=>navigation.navigate('Home',{page:'账户'})}/>
+            <Button title="账户" onPress={()=>navigation.navigate('HomeDetail',{page:'账户'})}/>
         </View>
         )
     }
